@@ -381,11 +381,14 @@ main(int argc, char **argv) {
 	imlib_context_set_visual(DefaultVisual(dpy,0));
 	imlib_context_set_drawable(RootWindow(dpy,XScreenNumberOfScreen(scr)));	
 	imlib_copy_drawable_to_image(0,0,0,scr->width,scr->height,0,0,1);
-	
+
+#ifdef BLUR
+
 	/*Blur function*/
 	imlib_image_blur(blurRadius);
+#endif // BLUR	
 
-
+#ifdef PIXELATION
 	/*Pixelation*/
 	int width = scr->width;
 	int height = scr->height;
@@ -423,7 +426,7 @@ main(int argc, char **argv) {
 	}
 	
 	
-	
+#endif
 	/* check for Xrandr support */
 	rr.active = XRRQueryExtension(dpy, &rr.evbase, &rr.errbase);
 
